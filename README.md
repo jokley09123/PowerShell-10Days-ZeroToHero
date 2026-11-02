@@ -1,6 +1,7 @@
 # PowerShell – 10 Days: Zero to Hero
 
 ![PowerShell 10 Days Zero to Hero](Screenshots/Project-Banner.png)
+Screenshots/Day-01/Project-Banner.png
 
 <p align="center">
   <strong>Learn • Practice • Automate • Improve</strong>
