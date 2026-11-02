@@ -1,50 +1,82 @@
 # 🚀 Day 01: PowerShell Fundamentals for SysAdmins
 
-Today marks the beginning of my 10-day PowerShell automation journey! I focused on understanding core PowerShell architecture, cmdlet naming conventions, and fundamental administration commands within **Windows Server 2022**.
+Today marks the beginning of my 10-day PowerShell automation journey!
+
+I focused on understanding core PowerShell architecture, cmdlet naming conventions, and fundamental administration commands within **Windows Server 2022**.
 
 ---
 
 ## 📌 Key Learning Areas
-* 🔹 **PowerShell Architecture & Versions:** Understanding the environment and system variables.
-* 🔹 **Cmdlet Naming Conventions:** Learning the standard `Verb-Noun` syntax (e.g., `Get-Process`, `Set-ExecutionPolicy`).
-* 🔹 **Command Discovery & Documentation:** Exploring commands dynamically using `Get-Command` and `Get-Help`.
-* 🔹 **PowerShell Execution Policies:** Understanding script execution permissions and security configurations.
+
+- 🔹 **PowerShell Architecture & Versions:** Understanding the environment and system variables.
+- 🔹 **Cmdlet Naming Conventions:** Learning the standard `Verb-Noun` syntax.
+- 🔹 **Command Discovery & Documentation:** Exploring commands using `Get-Command` and `Get-Help`.
+- 🔹 **PowerShell Execution Policies:** Understanding script execution permissions and security configurations.
 
 ---
 
 ## 💻 Hands-on Exercises & Scripts
 
 ### 1. PowerShell Version Check
-Displays detailed version details including PSVersion (5.1) and PSEdition.
+
+Displays PowerShell version details, including PSVersion and PSEdition.
+
 ```powershell
 $PSVersionTable
---------
-2. System Information Gathering
-Retrieves computer name, OS product name, and current Windows version.
-Get-ComputerInfo | Select-Object CsName, WindowsProductName, WindowsVersion.
-------------
-3. Service Inspection
-Lists all registered Windows services along with their current status (Running/Stopped).
+```
+
+### 2. System Information Gathering
+
+Retrieves computer name, OS product name, and Windows version.
+
+```powershell
+Get-ComputerInfo | Select-Object CsName, WindowsProductName, WindowsVersion
+```
+
+### 3. Service Inspection
+
+Lists registered Windows services and their current status.
+
+```powershell
 Get-Service
--------------
-4. Process Monitoring
-Retrieves running system processes along with handle counts, memory usage (WS/PM), and CPU time.
+```
+
+### 4. Process Monitoring
+
+Retrieves running system processes and their resource information.
+
+```powershell
 Get-Process
-----------------
+```
+
+---
 
 ## 📸 Lab Evidence & Screenshots
 
 ### 1. PowerShell Version Check Output
-![PSVersionTable Output](lab1-version.png)
+
+![PSVersionTable Output](../../Screenshots/Day-01/lab1-version.png)
 
 ### 2. System Information Retrieval
-![Get-ComputerInfo Output](lab1-sysinfo.png)
+
+![Get-ComputerInfo Output](../../Screenshots/Day-01/lab1-sysinfo.png)
 
 ### 3. Windows Services Status
-![Get-Service Output](lab1-service.png)
+
+![Get-Service Output](../../Screenshots/Day-01/lab1-service.png)
 
 ### 4. Active System Processes
-![Get-Process Output](lab1-process.png)
+
+![Get-Process Output](../../Screenshots/Day-01/lab1-process.png)
+
+---
+
+## 🎯 Day 01 Outcome
+
+Successfully completed the introductory PowerShell practical exercises on Windows Server 2022.
+
+**Next:** Day 02 – PowerShell Objects, Pipelines & Filtering.
 
 Learning by doing. Progress through practice. 💻🔥
 
+#PowerShell #WindowsServer2022 #SystemAdministration
