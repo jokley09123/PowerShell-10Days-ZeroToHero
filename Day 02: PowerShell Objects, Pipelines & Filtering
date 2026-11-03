@@ -1,0 +1,56 @@
+🚀 Day 02: PowerShell Objects, Pipelines & Filtering
+
+Today, I continued my 10-day PowerShell learning challenge, focusing on PowerShell objects, pipelines, filtering, and sorting in Windows Server 2022.
+
+ 📌 Key Learning Areas
+
+- Understanding PowerShell Objects.
+- Exploring object properties and methods using `Get-Member`.
+- Using the Pipeline (`|`) to connect commands.
+- Selecting specific properties with `Select-Object`.
+- Filtering data with `Where-Object`.
+- Sorting data using `Sort-Object`.
+
+ 💻 Hands-on Practical Labs
+
+ Lab 1: PowerShell Objects
+
+```powershell
+Get-Service | Get-Member
+```
+
+Explored PowerShell object properties and methods.
+
+ Lab 2: PowerShell Pipeline
+
+```powershell
+Get-Service | Select-Object Name, Status, StartType
+```
+
+Practiced passing service objects through the pipeline and selecting specific properties.
+
+ Lab 3: Filtering & Sorting
+
+```powershell
+Get-Service | Where-Object {$_.Status -eq 'Running'}
+
+Get-Service | Where-Object {$_.Status -eq 'Stopped'}
+
+Get-Service | Sort-Object Name
+```
+
+Practiced filtering Windows services by status and sorting them alphabetically.
+
+ 📸 Lab Evidence
+
+1. `lab1-objects.png` – Object properties and methods.
+2. `lab2-pipeline.png` – Pipeline and Select-Object.
+3. `lab3-filtering.png` – Filtering and sorting.
+
+ 🎯 Day 02 Outcome
+
+Completed three practical labs covering PowerShell objects, pipelines, filtering, and sorting.
+
+Next: Day 03 – Working with Files & Folders
+
+Learning by doing. Progress through practice. 💻
