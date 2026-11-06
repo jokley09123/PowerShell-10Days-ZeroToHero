@@ -1,0 +1,102 @@
+ Day 03: File System & NTFS Permissions
+
+ Overview
+
+Day 03 focuses on File System Management and NTFS Permissions using Microsoft PowerShell in a Windows Server 2022 environment.
+
+The objective is to develop practical skills in managing files and directories, inspecting access permissions, and applying permission changes.
+
+## Key Learning Areas
+
+- File and directory management
+- Creating folders using `New-Item`
+- Copying files using `Copy-Item`
+- Moving files using `Move-Item`
+- Inspecting file system objects
+- Understanding NTFS permissions
+- Viewing Access Control Lists (ACLs)
+- Managing permissions using `icacls`
+
+## 💻 Practical Labs
+
+### Lab 1: Creating Directories
+
+```powershell
+New-Item -Path "C:\PowerShell-Lab" -ItemType Directory
+
+New-Item -Path "C:\PowerShell-Lab\Documents" -ItemType Directory
+
+New-Item -Path "C:\PowerShell-Lab\Reports" -ItemType Directory
+
+New-Item -Path "C:\PowerShell-Lab\Backup" -ItemType Directory
+```
+
+**What I practiced:** Creating a main directory and organizing subdirectories.
+
+![Directory Management](../../Screenshots/Day-03/lab1-directories.png)
+
+### Lab 2: Creating, Copying and Moving Files
+
+```powershell
+New-Item -Path "C:\PowerShell-Lab\Report.txt" -ItemType File
+
+Copy-Item "C:\PowerShell-Lab\Report.txt" "C:\PowerShell-Lab\Backup\"
+
+Move-Item "C:\PowerShell-Lab\Report.txt" "C:\PowerShell-Lab\Reports\"
+```
+
+**What I practiced:** Creating a file, copying it to a backup folder, and moving the original file to the Reports folder.
+
+![File Management](../../Screenshots/Day-03/lab2-file-management.png)
+
+### Lab 3: Viewing NTFS Permissions
+
+```powershell
+Get-Acl "C:\PowerShell-Lab" | Format-List
+
+(Get-Acl "C:\PowerShell-Lab").Access
+```
+
+**What I practiced:** Inspecting folder security information and viewing access control entries.
+
+![NTFS Permissions](../../Screenshots/Day-03/lab3-ntfs-permissions.png)
+
+### Lab 4: Granting Modify Permission
+
+```powershell
+$LabPath = "C:\PowerShell-Lab"
+
+$Account = "$env:USERDOMAIN\$env:USERNAME"
+
+icacls $LabPath /grant "${Account}:(M)"
+
+Get-Acl $LabPath | Format-List
+```
+
+**What I practiced:** Granting Modify permission to the current account on the lab directory and checking the resulting permissions.
+
+![Modify Permission](../../Screenshots/Day-03/lab4-modify-permission.png)
+
+## Skills Practiced
+
+- PowerShell file system management
+- Directory and file operations
+- NTFS permissions inspection
+- Access Control Lists (ACLs)
+- Permission management with `icacls`
+
+## Tools & Technologies
+
+- Microsoft PowerShell 5.1
+- Windows Server 2022
+- NTFS File System
+
+## Learning Outcome
+
+Completed four practical exercises covering directory creation, file operations, NTFS permission inspection, and Modify permission management.
+
+Learning by doing. Progress through practice.
+
+---
+
+Challenge Progress: Day 03 / 10 Completed
