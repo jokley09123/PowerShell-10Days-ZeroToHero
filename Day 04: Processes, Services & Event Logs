@@ -1,0 +1,91 @@
+# 🚀 Day 04: Processes, Services & Event Logs
+
+## Overview
+
+Day 04 focuses on Process Management, Windows Service Management, and Event Log Monitoring using Microsoft PowerShell in a Windows Server 2022 environment.
+
+The objective is to develop practical skills in monitoring running processes, checking Windows services, investigating system events, and monitoring system activity.
+
+## Key Learning Areas
+
+- Process management using `Get-Process`
+- Monitoring running processes
+- Viewing Process IDs and CPU usage
+- Windows service management using `Get-Service`
+- Filtering Running and Stopped services
+- Investigating Windows Event Logs
+- Monitoring system events using `Get-WinEvent`
+- Process and service monitoring
+
+## 💻 Practical Labs
+
+### Lab 1: Process Management
+
+```powershell
+Get-Process | Sort-Object CPU -Descending | Select-Object -First 10 ProcessName, Id, CPU
+```
+
+**What I practiced:** Listing running processes, viewing Process IDs, and identifying processes with the highest accumulated CPU time.
+
+### Lab 2: Service Management
+
+```powershell
+Get-Service | Where-Object {$_.Status -eq 'Running'} | Select-Object -First 10 Name, Status
+```
+
+**What I practiced:** Listing Windows services, checking their status, and filtering services that are currently running.
+
+### Lab 3: Windows Event Logs
+
+```powershell
+Get-WinEvent -LogName System -MaxEvents 10 | Select-Object TimeCreated, Id, LevelDisplayName, ProviderName
+```
+
+**What I practiced:** Retrieving recent System Event Logs and reviewing event timestamps, IDs, levels, and providers.
+
+### Lab 4: Process & Service Monitoring
+
+```powershell
+Get-Process | Select-Object -First 5 ProcessName, Id, CPU
+
+Get-Service -Name Spooler, wuauserv | Select-Object Name, Status
+```
+
+**What I practiced:** Monitoring process information and checking the status of selected Windows services using PowerShell.
+
+## Skills Practiced
+
+- PowerShell process management
+- Windows service monitoring
+- Process identification and CPU monitoring
+- Windows Event Log investigation
+- System monitoring and troubleshooting
+- PowerShell command-line administration
+
+## Tools & Technologies
+
+- Microsoft PowerShell 5.1
+- Windows Server 2022
+- VMware Workstation
+- Windows Event Viewer
+
+## Screenshots
+
+Practical screenshots are stored in:
+
+`Screenshots/Day-04/`
+
+- `lab1-process-management.png`
+- `lab2-service-management.png`
+- `lab3-event-logs.png`
+- `lab4-system-monitoring.png`
+
+## Learning Outcome
+
+Completed four practical exercises covering process management, Windows service monitoring, System Event Log investigation, and system monitoring.
+
+**Learning by doing. Progress through practice.**
+
+---
+
+**Challenge Progress:** Day 04 / 10 Completed
