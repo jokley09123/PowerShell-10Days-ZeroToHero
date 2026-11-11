@@ -1,0 +1,111 @@
+ Day 05: Network Administration with PowerShell
+
+ Overview
+
+Day 05 focuses on Network Administration using PowerShell in Windows Server 2022.
+
+The goal of this practical session is to understand how PowerShell helps System Administrators inspect network configuration, perform DNS lookups, test network connectivity, and monitor network adapters.
+
+ Key Learning Areas
+
+- IP Configuration
+- DNS Configuration and Resolution
+- Network Connectivity Testing
+- Network Adapter Monitoring
+
+## 💻 Practical Labs
+
+### 1. Lab 1 – IP Configuration
+
+Command:
+
+```powershell
+Get-NetIPConfiguration
+```
+
+What I practiced:
+- Checking IP addresses.
+- Identifying the default gateway.
+- Viewing DNS server configuration.
+- Inspecting network interface information.
+
+Screenshot: `Screenshots/Day-05/lab1-ip-configuration.png`
+
+2. Lab 2 – DNS Configuration
+
+Command:
+
+```powershell
+Resolve-DnsName microsoft.com
+```
+
+What I practiced:
+- Performing DNS lookups.
+- Understanding DNS resolution.
+- Checking DNS Server service status.
+- Inspecting and configuring DNS Forwarders.
+
+Additional commands used during troubleshooting:
+
+```powershell
+Get-Service DNS
+Get-DnsServerForwarder
+Set-DnsServerForwarder -IPAddress 10.20.27.2 -PassThru
+```
+
+Screenshot: `Screenshots/Day-05/lab2-dns-configuration.png`
+
+ 3. Lab 3 – Network Connectivity
+
+Command:
+
+```powershell
+Test-NetConnection microsoft.com -Port 443
+```
+
+What I practiced:
+- Testing network connectivity.
+- Checking TCP port 443.
+- Understanding the `TcpTestSucceeded` result.
+
+Screenshot: `Screenshots/Day-05/lab3-network-connectivity.png`
+
+4. Lab 4 – Network Adapter Monitoring
+
+Command:
+
+```powershell
+Get-NetAdapter | Format-Table Name, InterfaceDescription, Status, LinkSpeed -AutoSize
+```
+
+What I practiced:
+- Listing network adapters.
+- Checking adapter status.
+- Viewing interface descriptions.
+- Monitoring link speed.
+
+Screenshot: `Screenshots/Day-05/lab4-network-adapter-monitoring.png`
+
+Skills Practiced
+
+- PowerShell Networking Commands
+- IP Configuration Inspection
+- DNS Troubleshooting
+- TCP Connectivity Testing
+- Network Adapter Monitoring
+
+ Tools & Technologies
+
+- Windows Server 2022
+- Windows PowerShell 5.1
+- VMware Workstation
+
+ Learning Outcome
+
+This practical session helped me understand how PowerShell can be used to inspect and troubleshoot network configuration in a Windows Server environment.
+
+---
+
+Challenge Progress: Day 05 / 10
+
+learning by doing. Progress through practice.
