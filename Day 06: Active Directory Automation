@@ -1,0 +1,120 @@
+# Day 06: Active Directory Automation
+
+## Overview
+
+On Day 06 of my PowerShell 10 Days: Zero to Hero challenge, I focused on Active Directory Automation using PowerShell on Windows Server 2022.
+
+The goal of this practical session was to understand how PowerShell can help System Administrators manage Active Directory users, groups, and Organizational Units (OUs).
+
+## Key Learning Areas
+
+- Active Directory PowerShell Module
+- Creating Active Directory Users
+- Creating Security Groups
+- Creating Organizational Units (OUs)
+- Verifying Active Directory objects using PowerShell
+
+## Hands-on Practical Exercises
+
+### Lab 1 – Active Directory Module
+
+Check whether the Active Directory PowerShell module is available and view its commands.
+
+```powershell
+Get-Module -ListAvailable ActiveDirectory
+
+Get-Command -Module ActiveDirectory
+```
+
+### Lab 2 – Creating an Active Directory User
+
+Retrieve domain information:
+
+```powershell
+Get-ADDomain
+```
+
+Create a test user:
+
+```powershell
+Import-Module ActiveDirectory
+
+$domain = Get-ADDomain
+$password = Read-Host "Enter test password" -AsSecureString
+
+New-ADUser `
+-Name "Lab User 01" `
+-GivenName "Lab" `
+-Surname "User" `
+-SamAccountName "labuser01" `
+-UserPrincipalName "labuser01@$($domain.DNSRoot)" `
+-Path "CN=Users,$($domain.DistinguishedName)" `
+-AccountPassword $password `
+-Enabled $true
+```
+
+Verify the user:
+
+```powershell
+Get-ADUser labuser01 -Properties Enabled, UserPrincipalName |
+Select-Object Name, SamAccountName, UserPrincipalName, Enabled
+```
+
+### Lab 3 – Creating an Active Directory Group
+
+Create a Global Security Group:
+
+```powershell
+New-ADGroup `
+-Name "IT-Support" `
+-SamAccountName "IT-Support" `
+-GroupCategory Security `
+-GroupScope Global `
+-Path "CN=Users,$((Get-ADDomain).DistinguishedName)"
+```
+
+Verify the group:
+
+```powershell
+Get-ADGroup IT-Support -Properties GroupScope, GroupCategory |
+Select-Object Name, SamAccountName, GroupScope, GroupCategory
+```
+
+### Lab 4 – Creating an Organizational Unit (OU)
+
+Create an Organizational Unit:
+
+```powershell
+New-ADOrganizationalUnit `
+-Name "IT-Department" `
+-Path (Get-ADDomain).DistinguishedName `
+-ProtectedFromAccidentalDeletion $true
+```
+
+Verify the OU:
+
+```powershell
+Get-ADOrganizationalUnit -Filter 'Name -eq "IT-Department"' |
+Select-Object Name, DistinguishedName
+```
+
+## Skills Practiced
+
+- Active Directory administration with PowerShell
+- User account management
+- Security group creation
+- Organizational Unit management
+- Verifying directory objects
+
+## Tools & Technologies
+
+- Windows Server 2022
+- PowerShell
+- Active Directory Domain Services (AD DS)
+- Active Directory PowerShell Module
+
+## Project Progress
+
+Day 06 focuses on automating common Active Directory administration tasks through PowerShell.
+
+**Learning by doing. Progress through practice.**
