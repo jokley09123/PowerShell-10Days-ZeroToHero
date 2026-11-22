@@ -1,0 +1,116 @@
+# Day 07: DNS Administration with PowerShell
+
+## Overview
+
+On Day 07 of my PowerShell 10 Days: Zero to Hero challenge, I focused on DNS Administration using PowerShell on Windows Server 2022.
+
+The goal of this practical session was to understand how PowerShell can help System Administrators manage DNS zones, troubleshoot DNS resolution, create DNS records, and perform DNS zone exports and backups.
+
+## Key Learning Areas
+
+- Advanced DNS Management
+- DNS Troubleshooting
+- DNS Record Management
+- Creating DNS A Records
+- DNS Zone Export
+- DNS Backup Verification
+
+## Hands-on Practical Exercises
+
+### Lab 1 – Advanced DNS Management
+
+Inspect DNS zones and DNS records using PowerShell.
+
+```powershell
+Get-DnsServerZone
+
+Get-DnsServerResourceRecord -ZoneName "Abdirhman.local"
+```
+
+### Lab 2 – DNS Troubleshooting
+
+Practice DNS troubleshooting and investigate DNS resolution and client cache.
+
+```powershell
+Resolve-DnsName microsoft.com
+
+Get-DnsClientCache
+
+Get-DnsServerForwarder
+```
+
+### Lab 3 – DNS Record Management
+
+Create a test DNS A record in the Active Directory DNS zone.
+
+```powershell
+$ZoneName = (Get-ADDomain).DNSRoot
+
+Add-DnsServerResourceRecordA `
+-ZoneName $ZoneName `
+-Name "lab-test" `
+-IPv4Address "10.20.27.129"
+```
+
+Verify the DNS record:
+
+```powershell
+Get-DnsServerResourceRecord `
+-ZoneName $ZoneName `
+-Name "lab-test"
+```
+
+Test DNS name resolution:
+
+```powershell
+Resolve-DnsName lab-test.$ZoneName
+```
+
+### Lab 4 – DNS Server Backup
+
+Export the DNS zone to a file.
+
+```powershell
+$ZoneName = (Get-ADDomain).DNSRoot
+
+Export-DnsServerZone `
+-Name $ZoneName `
+-FileName "Abdirhman-backup.dns"
+```
+
+Copy the exported DNS zone file into the backup directory.
+
+```powershell
+Copy-Item `
+"C:\Windows\System32\DNS\Abdirhman-backup.dns" `
+"C:\DNS-Backup"
+```
+
+Verify the backup file:
+
+```powershell
+Get-ChildItem "C:\DNS-Backup" -Recurse |
+Select-Object FullName, Length, LastWriteTime
+```
+
+## Skills Practiced
+
+- DNS Server administration with PowerShell
+- DNS zone management
+- DNS troubleshooting
+- DNS A record creation and verification
+- DNS name resolution testing
+- DNS zone export and backup verification
+
+## Tools & Technologies
+
+- Windows Server 2022
+- PowerShell
+- DNS Server
+- Active Directory Domain Services (AD DS)
+
+## Project Progress
+
+Day 07 focuses on managing, troubleshooting, and maintaining DNS services using PowerShell in a Windows Server environment.
+
+**Learning by doing. Progress through practice.**
