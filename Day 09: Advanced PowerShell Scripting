@@ -1,0 +1,204 @@
+# Day 09: Advanced PowerShell Scripting
+
+## Overview
+
+On Day 09 of my PowerShell 10 Days: Zero to Hero challenge, I focused on Advanced PowerShell Scripting using Windows Server 2022.
+
+The goal of this practical session was to understand how PowerShell scripting can be structured using variables, functions, loops, conditional logic, and error handling to automate administrative tasks and improve script reliability.
+
+## Key Learning Areas
+
+- PowerShell Variables
+- Functions and Reusable Commands
+- ForEach Loops
+- For Loops
+- While Loops
+- Conditional Logic (If/Else)
+- Error Handling (Try/Catch/Finally)
+- ErrorAction and Exception Handling
+
+## Hands-on Practical Exercises
+
+### Lab 1 – Variables
+
+Use variables to store and retrieve server information.
+
+```powershell
+$ServerName = $env:COMPUTERNAME
+$Admin = "System Administrator"
+$OS = (Get-CimInstance Win32_OperatingSystem).Caption
+
+$ServerName
+$Admin
+$OS
+
+Write-Host "Server Name: $ServerName"
+Write-Host "Administrator: $Admin"
+Write-Host "Operating System: $OS"
+```
+
+### Lab 2 – Functions
+
+Create reusable PowerShell functions to retrieve server information and check WinRM service status.
+
+```powershell
+function Get-ServerInfo {
+    Get-CimInstance Win32_OperatingSystem |
+    Select-Object CSName, Caption, Version
+}
+
+Get-ServerInfo
+```
+
+Create a function to check WinRM:
+
+```powershell
+function Get-WinRMStatus {
+    Get-Service WinRM |
+    Select-Object Name, Status, StartType
+}
+
+Get-WinRMStatus
+```
+
+### Lab 3 – Loops
+
+#### ForEach Loop – Service Monitoring
+
+Check multiple services using a loop.
+
+```powershell
+$Services = @("WinRM", "DNS", "NTDS", "LanmanServer")
+
+foreach ($ServiceName in $Services) {
+    Get-Service -Name $ServiceName |
+    Select-Object Name, Status, StartType
+}
+```
+
+#### For Loop – Numbered Iteration
+
+```powershell
+for ($i = 1; $i -le 5; $i++) {
+    Write-Host "Monitoring Check Number: $i"
+}
+```
+
+#### While Loop – Repeated Status Checks
+
+```powershell
+$count = 1
+
+while ($count -le 3) {
+    $Service = Get-Service WinRM
+
+    Write-Host "Check $count - WinRM Status: $($Service.Status)"
+
+    $count++
+}
+```
+
+#### ForEach Loop with Conditional Logic
+
+```powershell
+$Services = @("WinRM", "DNS", "NTDS", "LanmanServer")
+
+foreach ($ServiceName in $Services) {
+
+    $Service = Get-Service -Name $ServiceName
+
+    if ($Service.Status -eq "Running") {
+        Write-Host "$ServiceName is RUNNING" -ForegroundColor Green
+    }
+    else {
+        Write-Host "$ServiceName is NOT RUNNING" -ForegroundColor Yellow
+    }
+}
+```
+
+### Lab 4 – Error Handling
+
+#### Try and Catch
+
+```powershell
+try {
+    Get-Service -Name "FakeService" -ErrorAction Stop
+}
+catch {
+    Write-Host "Error detected: Service was not found." -ForegroundColor Red
+}
+```
+
+#### Try, Catch and Finally
+
+```powershell
+try {
+    Write-Host "Checking WinRM service..." -ForegroundColor Cyan
+
+    Get-Service -Name WinRM -ErrorAction Stop
+}
+catch {
+    Write-Host "An error occurred during the check." -ForegroundColor Red
+}
+finally {
+    Write-Host "Service check completed." -ForegroundColor Yellow
+}
+```
+
+#### Advanced Service Monitoring with Error Handling
+
+```powershell
+$Services = @("WinRM", "DNS", "NTDS", "FakeService")
+
+foreach ($ServiceName in $Services) {
+
+    try {
+        $Service = Get-Service -Name $ServiceName -ErrorAction Stop
+
+        Write-Host "$ServiceName : $($Service.Status)" -ForegroundColor Green
+    }
+    catch {
+        Write-Host "$ServiceName : Service not found or error occurred." -ForegroundColor Red
+    }
+}
+```
+
+#### Detailed Error Information
+
+```powershell
+try {
+    Get-Service -Name "FakeService" -ErrorAction Stop
+}
+catch {
+    Write-Host "Error Message:" -ForegroundColor Red
+    Write-Host $_.Exception.Message
+
+    Write-Host "Error Type:" -ForegroundColor Yellow
+    Write-Host $_.Exception.GetType().Name
+}
+finally {
+    Write-Host "Error handling lab completed." -ForegroundColor Cyan
+}
+```
+
+## Skills Practiced
+
+- PowerShell scripting fundamentals
+- Variables and data storage
+- Creating reusable functions
+- Loop-based automation
+- Conditional logic and service monitoring
+- Error handling and exception management
+- Building structured and reliable scripts
+
+## Tools & Technologies
+
+- Windows Server 2022
+- PowerShell 5.1
+- VMware Workstation
+
+## Project Progress
+
+Day 09 focuses on advanced scripting techniques, combining variables, functions, loops, conditional logic, and error handling to build more structured and reusable PowerShell scripts for System Administration.
+
+**Learning by doing. Progress through practice.**
