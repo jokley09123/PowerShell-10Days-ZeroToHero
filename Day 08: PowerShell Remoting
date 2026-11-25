@@ -1,0 +1,117 @@
+# Day 08: PowerShell Remoting
+
+## Overview
+
+On Day 08 of my PowerShell 10 Days: Zero to Hero challenge, I focused on PowerShell Remoting using Windows Server 2022.
+
+The goal of this practical session was to understand how PowerShell Remoting enables System Administrators to execute commands remotely, interact with remote sessions, collect system information, and perform remote administration using WinRM.
+
+## Key Learning Areas
+
+- WinRM Configuration and Verification
+- WSMan Connectivity Testing
+- Interactive Remote Sessions
+- Remote Command Execution
+- Remote System Information Collection
+- Remote Service Monitoring
+- Remote Process Monitoring
+
+## Hands-on Practical Exercises
+
+### Lab 1 – WinRM & Remoting Setup
+
+Check WinRM service status, inspect session configurations, verify WinRM configuration, and test WSMan connectivity.
+
+```powershell
+Get-Service WinRM
+
+Get-PSSessionConfiguration
+
+winrm get winrm/config
+
+Test-WSMan localhost
+```
+
+### Lab 2 – Enter-PSSession (Interactive Remote Session)
+
+Establish an interactive remote session and perform basic system checks inside the remote session.
+
+```powershell
+Enter-PSSession -ComputerName localhost
+
+hostname
+
+Get-Service WinRM
+
+Get-CimInstance Win32_OperatingSystem |
+Select-Object Caption, Version
+
+Exit-PSSession
+```
+
+### Lab 3 – Invoke-Command (Remote Command Execution)
+
+Execute commands remotely to retrieve hostname, operating system information, WinRM status, and process information.
+
+```powershell
+Invoke-Command -ComputerName localhost -ScriptBlock {
+    hostname
+}
+
+Invoke-Command -ComputerName localhost -ScriptBlock {
+    Get-CimInstance Win32_OperatingSystem |
+    Select-Object Caption, Version
+}
+
+Invoke-Command -ComputerName localhost -ScriptBlock {
+    Get-Service WinRM
+}
+
+Invoke-Command -ComputerName localhost -ScriptBlock {
+    Get-Process |
+    Select-Object -First 10 Name, Id, CPU
+}
+```
+
+### Lab 4 – Remote Administration
+
+Collect system information, retrieve running services, and monitor processes through a single remote ScriptBlock.
+
+```powershell
+Invoke-Command -ComputerName localhost -ScriptBlock {
+
+    Get-CimInstance Win32_OperatingSystem |
+    Select-Object Caption, Version
+
+    Get-Service |
+    Where-Object Status -eq "Running" |
+    Select-Object -First 10 Name, Status
+
+    Get-Process |
+    Sort-Object CPU -Descending |
+    Select-Object -First 10 Name, Id, CPU
+}
+```
+
+## Skills Practiced
+
+- PowerShell Remoting administration
+- WinRM configuration and verification
+- WSMan connectivity testing
+- Interactive remote sessions using Enter-PSSession
+- Remote command execution using Invoke-Command
+- Remote system information collection
+- Service and process monitoring
+
+## Tools & Technologies
+
+- Windows Server 2022
+- PowerShell 5.1
+- Windows Remote Management (WinRM)
+- VMware Workstation
+
+## Project Progress
+
+Day 08 focuses on remote administration, remote command execution, and system monitoring using PowerShell Remoting in a Windows Server environment.
+
+**Learning by doing. Progress through practice.**
